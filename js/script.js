@@ -3,16 +3,12 @@ Treehouse Techdegree:
 FSJS Project 2 - Data Pagination and Filtering
 */
 
-/*
-For assistance:
-   Check out the "Project Resources" section of the Instructions tab: https://teamtreehouse.com/projects/data-pagination-and-filtering#instructions
-   Reach out in your Slack community: https://treehouse-fsjs-102.slack.com/app_redirect?channel=unit-2
-*/
-
-/*
-Create the `showPage` function
-This function will create and insert/append the elements needed to display a "page" of nine students
-*/
+/**
+ * Creates and inserts/appends the elements need to display a page of 9 students
+ *
+ * @param {data} list -data pulled from data.js
+ * @param {number} page - the page number in which the elements will be displayed
+ */
 function showPage(list, page) {
   const startIndex = page * 9 - 9;
   const endIndex = page * 9;
@@ -46,10 +42,11 @@ function showPage(list, page) {
   }
 }
 
-/*
-Create the `addPagination` function
-This function will create and insert/append the elements needed for the pagination buttons
-*/
+/**
+ * Creates and inserts/appends pagination buttons
+ *
+ * @param {data} list - data pulled from data.js
+ */
 function addPagination(list) {
   const paginationBtns = Math.ceil(list.length / 9);
   const ul = document.querySelector('.link-list');
@@ -77,5 +74,4 @@ function addPagination(list) {
 }
 
 showPage(data, 1);
-// Call functions
 addPagination(data);
