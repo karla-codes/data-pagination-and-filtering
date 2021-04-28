@@ -73,7 +73,7 @@ function addPagination(list) {
   });
 }
 
-// create search component
+// creates search component
 function addSearchBar() {
   const header = document.querySelector('.header');
   const searchBar = `
@@ -93,11 +93,11 @@ function addSearchBar() {
   });
 }
 
-// function that executes search
+// executes search
 function searchNames() {
   const searchBar = document.querySelector('.student-search input');
   const inputValue = searchBar.value.toLowerCase();
-  const h3 = document.querySelector('.student-search h3');
+  const ul = document.querySelector('.student-list');
 
   const matchingStudents = [];
 
@@ -106,16 +106,15 @@ function searchNames() {
 
     if (inputValue !== 0 && name.includes(inputValue)) {
       matchingStudents.push(data[i]);
-      h3.textContent = '';
+      ul.textContent = '';
       showPage(matchingStudents, 1);
       addPagination(matchingStudents);
     }
   }
 
   if (matchingStudents.length === 0) {
-    h3.textContent = 'No results found';
-    showPage(data, 1);
-    addPagination(data);
+    ul.textContent = 'No results found';
+    addPagination(matchingStudents);
   }
 }
 
