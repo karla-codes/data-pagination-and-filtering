@@ -91,6 +91,11 @@ function addSearchBar() {
   searchButton.addEventListener('click', e => {
     searchNames();
   });
+
+  const searchInput = document.querySelector('.student-search input');
+  searchInput.addEventListener('keyup', () => {
+    searchNames();
+  });
 }
 
 // executes search
