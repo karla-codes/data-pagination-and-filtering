@@ -99,7 +99,6 @@ function searchNames() {
   const matchingStudents = [];
 
   for (let i = 0; i < data.length; i++) {
-    // console.log(Object.values(data[i].name));
     const name = Object.values(data[i].name).join(' ').toLowerCase();
 
     if (inputValue !== 0 && name.includes(inputValue)) {
@@ -112,22 +111,16 @@ function searchNames() {
   if (matchingStudents.length === 0) {
     const header = document.querySelector('.header label');
     const message = document.createElement('h3');
+    message.className = 'message';
     message.textContent = 'No results found';
     header.insertAdjacentElement('beforebegin', message);
     showPage(data, 1);
     addPagination(data);
   } else {
-    const message = document.querySelector('h3');
+    const message = document.querySelector('.message');
     message.textContent = '';
   }
 }
-
-// else {
-//   const header = document.querySelector('.header');
-//   const message = document.createElement('h3');
-//   message.textContent = 'No results found';
-//   header.insertAdjacentElement('beforebegin', message);
-// }
 
 showPage(data, 1);
 addPagination(data);
