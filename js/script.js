@@ -78,6 +78,7 @@ function addSearchBar() {
   const header = document.querySelector('.header');
   const searchBar = `
   <label for="search" class="student-search">
+    <h3></h3>
     <span>Search by name</span>
     <input id="search" placeholder="Search by name...">
     <button type="button"><img src="img/icn-search.svg" alt="Search icon"></button>
@@ -96,6 +97,8 @@ function addSearchBar() {
 function searchNames() {
   const searchBar = document.querySelector('.student-search input');
   const inputValue = searchBar.value.toLowerCase();
+  const h3 = document.querySelector('.student-search h3');
+
   const matchingStudents = [];
 
   for (let i = 0; i < data.length; i++) {
@@ -103,22 +106,16 @@ function searchNames() {
 
     if (inputValue !== 0 && name.includes(inputValue)) {
       matchingStudents.push(data[i]);
+      h3.textContent = '';
       showPage(matchingStudents, 1);
       addPagination(matchingStudents);
     }
   }
 
   if (matchingStudents.length === 0) {
-    const header = document.querySelector('.header label');
-    const message = document.createElement('h3');
-    message.className = 'message';
-    message.textContent = 'No results found';
-    header.insertAdjacentElement('beforebegin', message);
+    h3.textContent = 'No results found';
     showPage(data, 1);
     addPagination(data);
-  } else {
-    const message = document.querySelector('.message');
-    message.textContent = '';
   }
 }
 
