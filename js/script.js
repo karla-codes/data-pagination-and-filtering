@@ -61,7 +61,7 @@ function addPagination(list) {
     ul.insertAdjacentHTML('beforeend', buttonHTML);
   }
 
-  const firstButton = document.querySelector('button');
+  const firstButton = document.querySelector('li button');
   firstButton.className = 'active';
 
   ul.addEventListener('click', e => {
