@@ -21,19 +21,19 @@ function showPage(list, page) {
         <li class="student-item cf">
         <div class="student-details">
           <img class="avatar" src="${
-            data[i].picture.large
+            list[i].picture.large
           }" alt="Profile Picture">
           <h3>${
-            data[i].name.title +
+            list[i].name.title +
             ' ' +
-            data[i].name.first +
+            list[i].name.first +
             ' ' +
-            data[i].name.last
+            list[i].name.last
           }</h3>
-          <span class="email">${data[i].email}</span>
+          <span class="email">${list[i].email}</span>
         </div>
         <div class="joined-details">
-          <span class="date">Joined ${data[i].registered.date}</span>
+          <span class="date">Joined ${list[i].registered.date}</span>
         </div>
       </li>
       `;
@@ -69,9 +69,66 @@ function addPagination(list) {
     const clickedButton = e.target;
     activeButton.className = '';
     clickedButton.className = 'active';
-    showPage(data, clickedButton.textContent);
+    showPage(list, clickedButton.textContent);
   });
 }
 
+// create search component
+function addSearchBar() {
+  const header = document.querySelector('.header');
+  const searchBar = `
+  <label for="search" class="student-search">
+    <span>Search by name</span>
+    <input id="search" placeholder="Search by name...">
+    <button type="button"><img src="img/icn-search.svg" alt="Search icon"></button>
+  </label>
+
+  `;
+  header.insertAdjacentHTML('beforeend', searchBar);
+
+  const searchButton = document.querySelector('.student-search button');
+  searchButton.addEventListener('click', e => {
+    searchNames();
+  });
+}
+
+// function that executes search
+function searchNames() {
+  const searchBar = document.querySelector('.student-search input');
+  const inputValue = searchBar.value.toLowerCase();
+  const matchingStudents = [];
+
+  for (let i = 0; i < data.length; i++) {
+    // console.log(Object.values(data[i].name));
+    const name = Object.values(data[i].name).join(' ').toLowerCase();
+
+    if (inputValue !== 0 && name.includes(inputValue)) {
+      matchingStudents.push(data[i]);
+      showPage(matchingStudents, 1);
+      addPagination(matchingStudents);
+    }
+  }
+
+  if (matchingStudents.length === 0) {
+    const header = document.querySelector('.header label');
+    const message = document.createElement('h3');
+    message.textContent = 'No results found';
+    header.insertAdjacentElement('beforebegin', message);
+    showPage(data, 1);
+    addPagination(data);
+  } else {
+    const message = document.querySelector('h3');
+    message.textContent = '';
+  }
+}
+
+// else {
+//   const header = document.querySelector('.header');
+//   const message = document.createElement('h3');
+//   message.textContent = 'No results found';
+//   header.insertAdjacentElement('beforebegin', message);
+// }
+
 showPage(data, 1);
 addPagination(data);
+addSearchBar();
