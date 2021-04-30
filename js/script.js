@@ -62,12 +62,14 @@ function addPagination(list) {
   }
 
   const firstButton = document.querySelector('li button');
-  firstButton.className = 'active';
+
+  if (firstButton) {
+    firstButton.className = 'active';
+  }
 
   ul.addEventListener('click', e => {
     const activeButton = document.querySelector('.active');
     const clickedButton = e.target;
-    // console.log(e);
     if (clickedButton.nodeName === 'BUTTON') {
       activeButton.className = '';
       clickedButton.className = 'active';
